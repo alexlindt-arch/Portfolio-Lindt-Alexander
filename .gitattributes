@@ -1,0 +1,10 @@
+# Zeilenenden vereinheitlichen: im Repo immer LF, keine automatische CRLF-Umwandlung
+* text=auto eol=lf
+
+# Binärdateien nicht anfassen
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.webp binary
+*.ico  binary
+*.mp4  binary

@@ -1,0 +1,13 @@
+# Builder / editor cruft (not part of the site)
+.thumbnail
+uploads/
+scraps/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
