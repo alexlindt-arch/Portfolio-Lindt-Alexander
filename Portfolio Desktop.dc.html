@@ -19,6 +19,8 @@
   <style>
     html { scroll-behavior:smooth; }
     .al-nav.al-nav-solid{ background:rgba(14,16,19,.85); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
+    .al-subnav{ position:sticky; top:0; z-index:20; height:80px; margin-bottom:-80px; display:flex; align-items:center; padding:19px 72px; box-sizing:border-box; background:transparent; opacity:0; pointer-events:none; transition:background .3s ease, opacity .35s ease; }
+    .al-subnav.is-solid{ background:rgba(14,16,19,.95); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); opacity:1; pointer-events:auto; }
     .al-navlink { position:relative; }
     .al-navlink::after { content:''; position:absolute; left:50%; transform:translateX(-50%); background:center / 100% 100% no-repeat; opacity:0; transition:opacity .3s ease; pointer-events:none; }
     .al-navlink:hover::after { opacity:1; }
@@ -392,6 +394,22 @@
   <!-- ============ LEGAL NOTICE (full page) ============ -->
   <sc-if value="{{ showLegal }}" hint-placeholder-val="{{ false }}">
     <div id="legal-scroll" style="position:fixed; inset:0; z-index:120; background:#F8F9FA; overflow-y:auto;">
+      <div class="al-subnav">
+        <div style="display:flex; align-items:center; justify-content:space-between; width:100%; max-width:1440px; margin:0 auto; gap:32px;">
+          <a href="#hero" onClick="{{ closeLegal }}" style="font-family:'Dancing Script',cursive; font-weight:700; font-size:42px; color:#3355FF; text-decoration:none; line-height:1; display:inline-flex; cursor:pointer;">A<span style="display:inline-block; transform:scaleX(-1); margin-left:-0.1em;">L</span></a>
+          <a href="#about" onClick="{{ closeLegal }}" style="color:#F8F9FA; text-decoration:none; font-weight:700; font-size:18px; cursor:pointer;" style-hover="color:#F87A55;">{{ t.navAbout }}</a>
+          <a href="#skills" onClick="{{ closeLegal }}" style="color:#F8F9FA; text-decoration:none; font-weight:700; font-size:18px; cursor:pointer;" style-hover="color:#F87A55;">{{ t.navSkills }}</a>
+          <a href="#projects" onClick="{{ closeLegal }}" style="color:#F8F9FA; text-decoration:none; font-weight:700; font-size:18px; cursor:pointer;" style-hover="color:#F87A55;">{{ t.navProjects }}</a>
+          <a href="#contact" onClick="{{ closeLegal }}" style="color:#F8F9FA; text-decoration:none; font-weight:700; font-size:18px; cursor:pointer;" style-hover="color:#F87A55;">{{ t.navContact }}</a>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <button onClick="{{ setEn }}" style="background:none; border:none; cursor:pointer; font-family:'Bricolage Grotesque',sans-serif; font-weight:600; font-size:16px; padding:4px 2px; color: {{ enColor }};">EN</button>
+            <div onClick="{{ toggleLang }}" style="width:32px; height:8px; background:#F87A55; border:1px solid #F8F9FA; border-radius:100px; position:relative; cursor:pointer;">
+              <div style="position:absolute; width:16px; height:16px; border-radius:50%; top:-5px; background:#3355FF; border:1px solid #F8F9FA; transition:left .2s; left: {{ knobLeft }};"></div>
+            </div>
+            <button onClick="{{ setDe }}" style="background:none; border:none; cursor:pointer; font-family:'Bricolage Grotesque',sans-serif; font-weight:600; font-size:16px; padding:4px 2px; color: {{ deColor }};">DE</button>
+          </div>
+        </div>
+      </div>
       <!-- torn-paper header (image only, no solid black behind) -->
       <div style="position:relative; background:url('assets/images/footer-paper.webp') no-repeat center bottom; background-size:100% auto;">
         <!-- nav -->
@@ -570,6 +588,15 @@ class Component extends DCLogic {
         -(hero.getBoundingClientRect().top || 0)
       );
       nav.classList.toggle('al-nav-solid', y > 4);
+      document.querySelectorAll('.al-subnav').forEach((sn) => {
+        let sc = sn.parentElement, top = 0;
+        while (sc) {
+          const oy = getComputedStyle(sc).overflowY;
+          if (oy === 'auto' || oy === 'scroll') { top = sc.scrollTop || 0; break; }
+          sc = sc.parentElement;
+        }
+        sn.classList.toggle('is-solid', top > 4);
+      });
       // position:fixed innerhalb eines gezoomten Containers: Breite manuell auf die
       // echte Viewport-Innenbreite (ohne Scrollbar) setzen, geteilt durch den Zoom aller Vorfahren.
       let z = 1;
