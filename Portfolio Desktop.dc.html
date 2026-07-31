@@ -845,7 +845,7 @@ class Component extends DCLogic {
         cardFilter: isActive ? 'drop-shadow(0px 18px 34px rgba(0,0,0,.30))' : 'drop-shadow(0px 0px 8px rgba(0,0,0,.16))',
         cardOpacity: 1,
         goldOpacity: isActive ? '1' : '0',
-        selectTesti: () => this.setState(s => ({ activeTesti: s.activeTesti === i ? null : i })),
+        selectTesti: () => this.setState({ activeTesti: i }),
         hoverTesti: () => this.setState({ activeTesti: i }),
         leaveTesti: () => this.setState(s => (s.activeTesti === i ? { activeTesti: null } : null))
       };
