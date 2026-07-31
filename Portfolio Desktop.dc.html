@@ -89,6 +89,8 @@
       100% { clip-path:inset(0 0 0 0); }
     }
     .al-line.run { animation:al-line-cycle 4s ease-in-out infinite; }
+    @keyframes al-ring-cycle { 0%{clip-path:inset(0 50% 0 50%);} 20%{clip-path:inset(0 0 0 0);} 68%{clip-path:inset(0 0 0 0);} 88%{clip-path:inset(0 50% 0 50%);} 100%{clip-path:inset(0 50% 0 50%);} }
+    .al-ring.run { animation:al-ring-cycle 4.5s ease-in-out infinite; }
     @keyframes al-circle-cycle {
       0% { stroke-dashoffset:0; }
       35% { stroke-dashoffset:0; }
@@ -196,7 +198,7 @@
         <div style="font-weight:500; font-size:20px; text-transform:uppercase; color:#F8F9FA; letter-spacing:1px; text-align:right;">{{ t.stackEyebrow }}</div>
         <div style="position:relative; display:inline-block; align-self:flex-start; margin-left:8px;">
           <span style="font-weight:700; font-size:64px; line-height:100%; color:#F8F9FA; white-space:nowrap; position:relative; z-index:1;">{{ t.stackTitle }}</span>
-          <img class="al-line" src="assets/images/skills-circle.png" alt="" style="position:absolute; left:-34px; top:-24px; width:calc(100% + 66px); height:calc(100% + 52px); pointer-events:none; object-fit:fill;">
+          <img class="al-line al-ring" src="assets/images/skills-circle.png" alt="" style="position:absolute; left:-34px; top:-24px; width:calc(100% + 66px); height:calc(100% + 52px); pointer-events:none; object-fit:fill;">
         </div>
       </div>
       <div style="flex:1; max-width:700px; min-height:150px; background:url('assets/images/paper-white.png'); background-size:100% 100%; background-repeat:no-repeat; padding:36px 56px; display:flex; align-items:center;">
