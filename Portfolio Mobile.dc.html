@@ -175,7 +175,7 @@
         <div style="font-weight:500; font-size:18px; text-transform:uppercase; color:#F8F9FA; letter-spacing:1px; text-align:right;">{{ t.stackEyebrow }}</div>
         <div style="position:relative; display:inline-block; margin-right:4px;">
           <span style="font-weight:700; font-size:clamp(38px,9.5vw,72px); line-height:100%; color:#F8F9FA; white-space:nowrap; position:relative; z-index:1;">{{ t.stackTitle }}</span>
-          <svg class="al-line al-circle" style="position:absolute; left:-22px; top:-14px; width:calc(100% + 40px); height:calc(100% + 30px); pointer-events:none;" viewBox="0 0 300 98" preserveAspectRatio="none" fill="none"><path pathLength="1" style="stroke-dasharray:1;" d="M196 10 C 96 2, 12 16, 9 46 C 6 78, 74 94, 158 92 C 244 90, 293 74, 291 46 C 289 18, 216 6, 148 8 C 108 9, 62 14, 34 24" stroke="#F87A55" stroke-width="7" stroke-linecap="round"></path></svg>
+          <img class="al-line" src="assets/images/skills-circle.png" alt="" style="position:absolute; left:-30px; top:-20px; width:calc(100% + 58px); height:calc(100% + 46px); pointer-events:none; object-fit:fill;">
         </div>
       </div>
       <div style="width:100%; min-height:200px; background:url('assets/images/strip-skillset.png'); background-size:100% 100%; background-repeat:no-repeat; padding:44px 28px; display:flex; align-items:center;">
@@ -221,7 +221,7 @@
         <div style="font-weight:500; font-size:18px; text-transform:uppercase; letter-spacing:1px;">{{ t.craftEyebrow }}</div>
         <div style="display:flex; flex-direction:column; gap:4px; align-self:flex-start; width:clamp(180px,42vw,320px);">
           <span class="al-btitle" style="font-weight:700; font-size:clamp(38px,9.5vw,72px); line-height:100%;">{{ t.projectsTitle }}</span>
-          <img class="al-line" src="assets/images/squiggle-yellow.png" alt="" style="width:100%; height:clamp(20px,5vw,34px); object-fit:contain; margin-left:-12px;">
+          <img class="al-line" src="assets/images/projects-line.png" alt="" style="width:100%; height:auto; object-fit:contain; margin-left:-12px;">
         </div>
       </div>
       <p style="margin:0; font-size:18px; line-height:22px; text-align:justify;">{{ t.projectsText }}</p>
@@ -271,7 +271,7 @@
   <section id="testimonials" data-screen-label="05 Testimonials" style="background:#F8F9FA; padding:clamp(56px,17vw,88px) 16px; display:flex; flex-direction:column; gap:32px;">
     <div style="display:flex; flex-direction:column; align-items:flex-end; width:100%;">
       <div style="display:flex; justify-content:flex-end; align-items:flex-start; gap:8px;">
-        <img class="al-line" src="assets/images/arrow-blue.png" alt="" style="width:100px; height:36px; object-fit:contain;">
+        <img class="al-line" src="assets/images/testimonials-arrow.png" alt="" style="width:100px; height:auto; object-fit:contain;">
         <span style="font-weight:500; font-size:18px; text-transform:uppercase;">{{ t.testiEyebrow }}</span>
       </div>
       <div class="al-btitle" style="font-weight:700; font-size:clamp(38px,9.5vw,72px); line-height:100%; text-align:right;">{{ t.testiTitle }}</div>
@@ -344,7 +344,7 @@
           <span style="font-size:16px; line-height:120%; color:#F8F9FA;">{{ t.privacyPre }}<span onClick="{{ openLegalStop }}" style="text-decoration:underline; cursor:pointer;" style-hover="color:#F87A55;">{{ t.privacyLink }}</span>{{ t.privacyPost }}</span>
         </div>
         <div style="display:flex; align-items:center; justify-content:space-between; width:100%; gap:16px;">
-          <img class="al-line" src="assets/images/arrow.png" alt="" style="width:clamp(96px,34vw,280px); height:auto; flex:none;">
+          <img class="al-line" src="assets/images/contact-arrow.png" alt="" style="width:clamp(110px,38vw,320px); height:auto; flex:none;">
         <div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px;">
           <button onClick="{{ sendForm }}" disabled="{{ sendDisabled }}" class="al-cta" style="display:inline-flex; align-items:center; justify-content:center; padding:12px 32px; border:1px solid #F8F9FA; border-radius:100px; box-shadow:2px 4px 0px #F8F9FA; color:#F8F9FA; font-weight:500; font-size:18px; background:rgba(0,0,0,.01); cursor:pointer; font-family:'Bricolage Grotesque',sans-serif; white-space:nowrap; opacity: {{ sendOpacity }};">{{ t.send }}</button>
           <span style="min-height:18px; font-size:14px; color:#35C77F; text-align:right;">{{ sentMsg }}</span>
