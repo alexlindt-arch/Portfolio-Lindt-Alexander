@@ -18,6 +18,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Dancing+Script:wght@600;700&family=Sacramento&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
   <style>
     html { scroll-behavior:smooth; }
+    #hero,#about,#skills,#projects,#contact{ scroll-margin-top:88px; }
     .al-nav.al-nav-solid{ background:rgba(14,16,19,.85); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
     .al-subnav{ position:sticky; top:0; z-index:20; height:80px; margin-bottom:-80px; display:flex; align-items:center; padding:19px 72px; box-sizing:border-box; background:transparent; opacity:0; pointer-events:none; transition:background .3s ease, opacity .35s ease; }
     .al-subnav.is-solid{ background:rgba(14,16,19,.95); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); opacity:1; pointer-events:auto; }
@@ -631,9 +632,8 @@ class Component extends DCLogic {
       const go = () => {
         const t = document.getElementById(href.slice(1));
         if (!t) return;
-        const top = t.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop || 0) - 80;
-        try { window.scrollTo({ top: top < 0 ? 0 : top, behavior: 'smooth' }); }
-        catch (err) { window.scrollTo(0, top < 0 ? 0 : top); }
+        try { t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+        catch (err) { t.scrollIntoView(); }
       };
       requestAnimationFrame(() => requestAnimationFrame(go));
     };
