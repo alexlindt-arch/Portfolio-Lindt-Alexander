@@ -299,7 +299,8 @@
     </div>
     <div style="display:flex; justify-content:center; gap:0; width:100%; max-width:1440px; margin:0 auto;">
       <sc-for list="{{ testimonials }}" as="tst" hint-placeholder-count="3">
-        <div onClick="{{ tst.selectTesti }}" onMouseEnter="{{ tst.hoverTesti }}" onMouseLeave="{{ tst.leaveTesti }}" style="width:512px; height:320px; box-sizing:border-box; flex:none; margin:0 -84px; background: {{ tst.cardBg }}; color:#0E1013; padding:48px 40px; display:flex; flex-direction:column; justify-content:space-between; gap:37px; cursor:pointer; opacity: {{ tst.cardOpacity }}; filter: {{ tst.cardFilter }}; transform: {{ tst.tilt }}; z-index: {{ tst.z }}; transition:transform .35s cubic-bezier(.22,1,.36,1), filter .35s ease, opacity .35s ease;">
+        <div onClick="{{ tst.selectTesti }}" onMouseEnter="{{ tst.hoverTesti }}" onMouseLeave="{{ tst.leaveTesti }}" style="position:relative; width:512px; height:320px; box-sizing:border-box; flex:none; margin:0 -84px; background: {{ tst.cardBg }}; color:#0E1013; padding:48px 40px; display:flex; flex-direction:column; justify-content:space-between; gap:37px; cursor:pointer; opacity: {{ tst.cardOpacity }}; filter: {{ tst.cardFilter }}; transform: {{ tst.tilt }}; z-index: {{ tst.z }}; transition:transform .35s cubic-bezier(.22,1,.36,1), filter .35s ease, opacity .35s ease;">
+          <img src="assets/images/testi-gold.png" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity: {{ tst.goldOpacity }}; z-index:-1; pointer-events:none; transition:opacity .35s ease;">
           <p style="margin:0; font-size:18px; line-height:120%;">„{{ tst.quote }}“</p>
           <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:10px;">
             <div style="display:flex; flex-direction:column; gap:4px;">
@@ -843,6 +844,7 @@ class Component extends DCLogic {
         z: isActive ? 30 : [2, 1, 0][i % 3],
         cardFilter: isActive ? 'drop-shadow(0px 18px 34px rgba(0,0,0,.30))' : 'drop-shadow(0px 0px 8px rgba(0,0,0,.16))',
         cardOpacity: 1,
+        goldOpacity: isActive ? '1' : '0',
         selectTesti: () => this.setState(s => ({ activeTesti: s.activeTesti === i ? null : i })),
         hoverTesti: () => this.setState({ activeTesti: i }),
         leaveTesti: () => this.setState(s => (s.activeTesti === i ? { activeTesti: null } : null))
