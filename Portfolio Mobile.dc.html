@@ -340,7 +340,7 @@
 
       <div style="display:flex; flex-direction:column; align-items:flex-end; gap:16px;">
         <div onClick="{{ togglePrivacy }}" style="display:flex; align-items:flex-start; gap:8px; cursor:pointer; width:100%;">
-          <div style="width:24px; height:24px; border:2px solid #3355FF; border-radius:4px; flex:none; display:flex; align-items:center; justify-content:center; color:#F7C518; font-weight:700; font-size:18px;">{{ privacyMark }}</div>
+          <div style="width:28px; height:28px; flex:none; background:url('assets/images/checkbox-box.png') center / contain no-repeat; display:flex; align-items:center; justify-content:center;"><img src="assets/images/checkbox-check.png" alt="" style="width:19px; height:19px; object-fit:contain; opacity: {{ privacyCheckOpacity }}; transition:opacity .15s ease;"></div>
           <span style="font-size:16px; line-height:120%; color:#F8F9FA;">{{ t.privacyPre }}<span onClick="{{ openLegalStop }}" style="text-decoration:underline; cursor:pointer;" style-hover="color:#F87A55;">{{ t.privacyLink }}</span>{{ t.privacyPost }}</span>
         </div>
         <div style="display:flex; align-items:center; justify-content:space-between; width:100%; gap:16px;">
@@ -863,7 +863,7 @@ class Component extends DCLogic {
       goBackLabel: lang === 'de' ? 'Zurück' : 'Go Back',
       nextLabel: lang === 'de' ? 'Nächstes Projekt' : 'Next Project',
       togglePrivacy: () => this.setState(s => ({ privacy: !s.privacy })),
-      privacyMark: this.state.privacy ? '✓' : '',
+      privacyCheckOpacity: this.state.privacy ? '1' : '0',
       sendOpacity: formValid ? 1 : 0.5,
       sendDisabled: !formValid,
       fName: this.state.fName, fEmail: this.state.fEmail, fMsg: this.state.fMsg,
