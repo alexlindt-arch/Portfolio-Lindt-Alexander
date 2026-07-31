@@ -20,6 +20,8 @@
   <style>
     html { scroll-behavior:smooth; }
     .al-nav.al-nav-solid{ background:rgba(14,16,19,.85); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
+    .al-subnav{ position:sticky; top:0; z-index:20; background:rgba(14,16,19,.72); transition:background .3s ease, backdrop-filter .3s ease; }
+    .al-subnav.is-solid{ background:rgba(14,16,19,.95); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
     html, body { margin:0; padding:0; background:#0E1013; }
     * { box-sizing:border-box; }
     body { font-family:'Bricolage Grotesque',sans-serif; }
@@ -376,7 +378,7 @@
     <div style="position:fixed; top:0; left:0; width:100%; height:100vh; z-index:100; background:#0E1013; overflow-y:auto;">
       <div style="background:url('assets/images/detail-grid-trim.webp') center bottom / 100% 100% no-repeat;">
       <!-- top nav -->
-      <div style="height:64px; display:flex; align-items:center; justify-content:space-between; padding:16px;">
+      <div class="al-subnav" style="height:64px; display:flex; align-items:center; justify-content:space-between; padding:16px;">
         <span onClick="{{ closeDetail }}" style="font-family:'Dancing Script',cursive; font-weight:700; font-size:32px; color:#3355FF; line-height:1; display:inline-flex; cursor:pointer;">A<span style="display:inline-block; transform:scaleX(-1); margin-left:-0.1em;">L</span></span>
         <div onClick="{{ openMenu }}" style="width:38px; height:38px; cursor:pointer; display:flex; align-items:center; justify-content:center;"><img src="assets/images/menu-icon.png" alt="Menu" style="width:34px; height:34px; object-fit:contain;"></div>
       </div>
@@ -419,14 +421,14 @@
   <!-- ============ LEGAL NOTICE OVERLAY ============ -->
   <sc-if value="{{ legalOpen }}" hint-placeholder-val="{{ false }}">
     <div id="legal-scroll" style="position:fixed; top:0; left:0; width:100%; height:100vh; z-index:100; background:#F8F9FA; overflow-y:auto;">
+      <div class="al-subnav" style="height:64px; display:flex; align-items:center; justify-content:space-between; padding:16px;">
+        <span onClick="{{ closeLegal }}" style="font-family:'Dancing Script',cursive; font-weight:700; font-size:32px; color:#3355FF; line-height:1; display:inline-flex; cursor:pointer;">A<span style="display:inline-block; transform:scaleX(-1); margin-left:-0.1em;">L</span></span>
+        <div onClick="{{ openMenu }}" style="width:38px; height:38px; cursor:pointer; display:flex; align-items:center; justify-content:center;"><img src="assets/images/menu-icon.png" alt="Menu" style="width:34px; height:34px; object-fit:contain;"></div>
+      </div>
       <!-- torn paper header -->
       <div style="position:relative;">
-        <div style="background:#0E1013 url('assets/images/hero-paper-black.webp') top center / 840% auto no-repeat; padding:16px 16px 8px;">
-          <div style="height:32px; display:flex; align-items:center; justify-content:space-between;">
-            <span onClick="{{ closeLegal }}" style="line-height:1; display:inline-flex; cursor:pointer;"><span style="font-family:'Dancing Script',cursive; font-weight:700; font-size:32px; color:#3355FF; line-height:1; display:inline-flex;">A<span style="display:inline-block; transform:scaleX(-1); margin-left:-0.1em;">L</span></span></span>
-            <div onClick="{{ openMenu }}" style="width:38px; height:38px; cursor:pointer; display:flex; align-items:center; justify-content:center;"><img src="assets/images/menu-icon.png" alt="Menu" style="width:34px; height:34px; object-fit:contain;"></div>
-          </div>
-          <h1 style="margin:24px 0 0; font-weight:700; font-size:clamp(32px,7.5vw,54px); line-height:120%; color:#F8F9FA; overflow-wrap:break-word;">{{ legalTitleM }}</h1>
+        <div style="background:#0E1013 url('assets/images/hero-paper-black.webp') top center / 840% auto no-repeat; padding:24px 16px 8px;">
+          <h1 style="margin:0; font-weight:700; font-size:clamp(32px,7.5vw,54px); line-height:120%; color:#F8F9FA; overflow-wrap:break-word;">{{ legalTitleM }}</h1>
         </div>
         <div style="height:140px; background:transparent url('assets/images/hero-paper.webp') bottom center / 280% auto no-repeat; margin-top:-1px;"></div>
       </div>
@@ -547,6 +549,15 @@ class Component extends DCLogic {
         -(hero.getBoundingClientRect().top || 0)
       );
       nav.classList.toggle('al-nav-solid', y > 4);
+      document.querySelectorAll('.al-subnav').forEach((sn) => {
+        let sc = sn.parentElement, top = 0;
+        while (sc) {
+          const oy = getComputedStyle(sc).overflowY;
+          if (oy === 'auto' || oy === 'scroll') { top = sc.scrollTop || 0; break; }
+          sc = sc.parentElement;
+        }
+        sn.classList.toggle('is-solid', top > 4);
+      });
       let z = 1;
       for (let el = nav.parentElement; el; el = el.parentElement) {
         const ez = parseFloat(getComputedStyle(el).zoom);
