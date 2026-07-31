@@ -18,7 +18,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Dancing+Script:wght@600;700&family=Sacramento&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
   <style>
     html { scroll-behavior:smooth; }
-    .al-nav.al-nav-solid{ background:rgba(14,16,19,.85); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
+    .al-nav{ background:rgba(14,16,19,.88); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
     .al-navlink { position:relative; }
     .al-navlink::after { content:''; position:absolute; left:50%; transform:translateX(-50%); background:center / 100% 100% no-repeat; opacity:0; transition:opacity .3s ease; pointer-events:none; }
     .al-navlink:hover::after { opacity:1; }
@@ -55,8 +55,8 @@
     .al-hello-wave svg { width:40px; height:40px; display:block; }
     @keyframes al-hand { 0%{opacity:0; transform:rotate(-180deg) scale(.6)} 15%{opacity:1; transform:rotate(0deg) scale(1)} 30%{transform:rotate(25deg)} 45%{transform:rotate(-25deg)} 60%{transform:rotate(25deg)} 75%{transform:rotate(-25deg)} 90%{transform:rotate(14deg)} 100%{opacity:1; transform:rotate(0deg) scale(1)} }
     .al-hello:hover .al-hello-wave, .al-hello.is-wave .al-hello-wave { animation:al-hand 2.4s ease forwards; }
-    .al-word .al-ltr { display:inline-block; color:#F8F9FA; cursor:pointer; transition:color .2s ease; }
-    .al-word .al-ltr:hover, .al-word .al-ltr.is-lit { color:#F7C518; }
+    .al-word .al-ltr { display:inline-block; color:#F8F9FA; cursor:pointer; transition:color .2s ease, transform .2s ease; transform-origin:center bottom; }
+    .al-word .al-ltr:hover, .al-word .al-ltr.is-lit { color:#F7C518; transform:scale(1.18); }
     .al-ltr-up:hover, .al-ltr-up.is-lit { text-transform:lowercase; }
     .al-ltr-low:hover, .al-ltr-low.is-lit { text-transform:uppercase; }
     .al-peel { perspective:1100px; }
