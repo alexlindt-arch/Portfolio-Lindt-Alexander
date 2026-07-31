@@ -35,9 +35,19 @@
     .al-smiley-b { display:none; }
     .al-polaroid:hover .al-smiley-a, .al-polaroid.is-color .al-smiley-a { display:none; }
     .al-polaroid:hover .al-smiley-b, .al-polaroid.is-color .al-smiley-b { display:inline; }
-    .al-hello-wave { position:absolute; right:6px; top:-42px; font-size:34px; line-height:1; opacity:0; transform:rotate(-180deg) scale(.6); transform-origin:75% 75%; pointer-events:none; }
-    @keyframes al-hand { 0%{opacity:0; transform:rotate(-180deg) scale(.6)} 8%{opacity:1; transform:rotate(0deg) scale(1)} 18%{transform:rotate(18deg)} 28%{transform:rotate(-10deg)} 38%{transform:rotate(16deg)} 48%{transform:rotate(-6deg)} 58%{transform:rotate(10deg)} 68%{transform:rotate(0deg); opacity:1} 90%{opacity:1} 100%{opacity:0; transform:rotate(0deg) scale(.9)} }
-    .al-hello:hover .al-hello-wave { animation:al-hand 3.5s ease forwards; }
+    .al-hello { display:inline-block; }
+    .al-hello-btn { position:relative; display:inline-flex; align-items:center; justify-content:center; box-sizing:border-box; height:40px; padding:0 24px; border:1px solid #F8F9FA; border-radius:100px; font-weight:500; font-size:18px; color:#F8F9FA; white-space:nowrap; cursor:default; overflow:hidden; transition:border-color .35s ease; }
+    .al-hello-fill { position:absolute; left:50%; top:50%; width:0; height:0; border-radius:50%; background:#3355FF; transform:translate(-50%,-50%); transition:width .45s cubic-bezier(.22,1,.36,1), height .45s cubic-bezier(.22,1,.36,1); z-index:0; pointer-events:none; }
+    .al-hello-txt { position:relative; z-index:1; display:inline-block; transition:opacity .25s ease; }
+    .al-hello-hover { position:absolute; left:50%; transform:translateX(-50%); opacity:0; white-space:nowrap; }
+    .al-hello:hover .al-hello-btn, .al-hello.is-wave .al-hello-btn { border-color:#3355FF; }
+    .al-hello:hover .al-hello-fill, .al-hello.is-wave .al-hello-fill { width:360px; height:360px; }
+    .al-hello:hover .al-hello-default, .al-hello.is-wave .al-hello-default { position:absolute; left:50%; transform:translateX(-50%); opacity:0; }
+    .al-hello:hover .al-hello-hover, .al-hello.is-wave .al-hello-hover { position:static; transform:none; opacity:1; }
+    .al-hello-wave { position:absolute; right:-4px; top:-34px; width:40px; height:40px; line-height:0; opacity:0; transform:rotate(-180deg) scale(.6); transform-origin:75% 75%; pointer-events:none; z-index:2; }
+    .al-hello-wave svg { width:40px; height:40px; display:block; }
+    @keyframes al-hand { 0%{opacity:0; transform:rotate(-180deg) scale(.6)} 14%{opacity:1; transform:rotate(0deg) scale(1)} 26%{transform:rotate(18deg)} 38%{transform:rotate(-10deg)} 50%{transform:rotate(16deg)} 62%{transform:rotate(-6deg)} 74%{transform:rotate(10deg)} 100%{opacity:1; transform:rotate(0deg) scale(1)} }
+    .al-hello:hover .al-hello-wave, .al-hello.is-wave .al-hello-wave { animation:al-hand 2.4s ease forwards; }
     .al-word .al-ltr { display:inline-block; color:#F8F9FA; cursor:pointer; transition:color .2s ease; }
     .al-word-fe .al-ltr.is-lit, .al-word-fe .al-ltr:hover { color:#35C77F; }
     .al-word-dev .al-ltr.is-lit, .al-word-dev .al-ltr:hover { color:#F87A55; }
@@ -124,7 +134,7 @@
     <!-- title + photo -->
     <div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-52%); width:990px; display:flex; flex-direction:column; align-items:flex-end; gap:24px;">
       <div style="position:relative; width:100%; display:flex; flex-direction:column; align-items:flex-start; gap:32px;">
-        <div class="al-hello" style="position:relative; align-self:flex-start;"><span class="al-hello-wave" aria-hidden="true">👋</span><span style="display:inline-flex; border:1px solid #F8F9FA; border-radius:100px; padding:10px 24px; font-weight:500; font-size:18px; color:#F8F9FA; white-space:nowrap; cursor:default;">{{ t.hello }}</span></div>
+        <div class="al-hello" style="position:relative; align-self:flex-start;"><span class="al-hello-wave" aria-hidden="true"><svg width="40" height="40" viewBox="363 20 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M391.25 57.8795C390.894 57.8795 390.587 57.7486 390.33 57.487C390.073 57.2253 389.945 56.9163 389.945 56.5599C389.945 56.1941 390.068 55.885 390.316 55.6328C390.564 55.3806 390.875 55.2545 391.25 55.2545C393.208 55.2545 394.869 54.5727 396.233 53.2091C397.596 51.8457 398.278 50.1849 398.278 48.2266C398.278 47.8607 398.404 47.5528 398.656 47.3028C398.909 47.0528 399.222 46.9278 399.597 46.9278C399.945 46.9278 400.249 47.0575 400.51 47.317C400.772 47.5761 400.903 47.8793 400.903 48.2266C400.903 50.9118 399.958 53.192 398.07 55.067C396.181 56.942 393.907 57.8795 391.25 57.8795ZM366.445 33.0878C366.088 33.0878 365.779 32.9593 365.517 32.7024C365.256 32.4455 365.125 32.1386 365.125 31.782C365.125 29.1061 366.067 26.8238 367.952 24.9349C369.836 23.046 372.111 22.1016 374.778 22.1016C375.144 22.1016 375.456 22.2335 375.715 22.4974C375.975 22.7613 376.104 23.0714 376.104 23.4278C376.104 23.8028 375.979 24.1131 375.729 24.3586C375.479 24.6039 375.171 24.7266 374.806 24.7266C372.848 24.7266 371.182 25.4106 369.809 26.7786C368.436 28.1467 367.75 29.8053 367.75 31.7545C367.75 32.1295 367.624 32.4455 367.372 32.7024C367.119 32.9593 366.81 33.0878 366.445 33.0878ZM371.361 51.5391C368.861 49.0482 367.604 46.0598 367.59 42.5736C367.577 39.0875 368.815 36.1038 371.306 33.6224L374.257 30.6641C374.623 30.2982 374.986 30.1917 375.348 30.3445C375.709 30.4973 376.037 30.7149 376.333 30.9974C376.935 31.5993 377.241 32.3239 377.25 33.1711C377.259 34.0184 376.954 34.7521 376.333 35.3724L374.479 37.2128C374.22 37.472 374.09 37.7832 374.09 38.1466C374.09 38.5102 374.22 38.8216 374.479 39.0807L374.952 39.5878C375.669 40.3053 376.028 41.1745 376.028 42.1953C376.028 43.2161 375.669 44.0853 374.952 44.8028C374.753 45.002 374.653 45.2405 374.653 45.5182C374.653 45.796 374.753 46.0345 374.952 46.2336C375.151 46.4325 375.389 46.532 375.667 46.532C375.944 46.532 376.183 46.4325 376.382 46.2336C377.493 45.1225 378.05 43.7788 378.052 42.2024C378.055 40.626 377.503 39.2845 376.396 38.1778L377.729 36.817C378.336 36.2103 378.762 35.5228 379.007 34.7545C379.252 33.9859 379.308 33.2266 379.174 32.4766L385.632 26.0182C385.891 25.7682 386.204 25.6432 386.57 25.6432C386.935 25.6432 387.248 25.7682 387.507 26.0182C387.766 26.2774 387.896 26.5934 387.896 26.9661C387.896 27.3389 387.766 27.6549 387.507 27.9141L379.125 36.317L381.493 38.6849L392.257 27.9557C392.516 27.6966 392.826 27.567 393.188 27.567C393.549 27.567 393.859 27.6966 394.118 27.9557C394.377 28.2149 394.507 28.5239 394.507 28.8828C394.507 29.2417 394.377 29.5461 394.118 29.7961L383.389 40.5528L385.75 42.9486L395.34 33.3653C395.6 33.1153 395.912 32.9916 396.278 32.9941C396.644 32.9963 396.956 33.127 397.215 33.3861C397.475 33.6456 397.604 33.9535 397.604 34.3099C397.604 34.6663 397.475 34.9742 397.215 35.2336L387.632 44.817L390.021 47.2336L396.938 40.317C397.197 40.0575 397.509 39.9278 397.875 39.9278C398.241 39.9278 398.553 40.0575 398.812 40.317C399.072 40.5761 399.202 40.8839 399.202 41.2403C399.202 41.597 399.072 41.9049 398.812 42.1641L389.333 51.6503C386.843 54.1317 383.85 55.3609 380.354 55.3378C376.859 55.3145 373.861 54.0482 371.361 51.5391Z" fill="#F8F9FA"/></svg></span><span class="al-hello-btn"><span class="al-hello-fill" aria-hidden="true"></span><span class="al-hello-txt al-hello-default">{{ t.hello }}</span><span class="al-hello-txt al-hello-hover">{{ t.helloHover }}</span></span></div>
         <div onClick="{{ letterClick }}" class="al-word al-word-fe" style="font-weight:700; font-size:128px; line-height:100%; color:#F8F9FA; letter-spacing:-3px; cursor:default;"><span class="al-ltr">F</span><span class="al-ltr">r</span><span class="al-ltr">o</span><span class="al-ltr">n</span><span class="al-ltr">t</span><span class="al-ltr">e</span><span class="al-ltr">n</span><span class="al-ltr">d</span></div>
         <!-- polaroid -->
         <div class="al-polaroid" onClick="{{ polaroidClick }}" style="position:absolute; right:60px; top:-30px; width:210px; height:256px; background:#F8F9FA; transform:rotate(8deg); box-shadow:0 12px 36px rgba(0,0,0,.5); padding:14px 14px 0; cursor:pointer;">
@@ -676,7 +686,7 @@ class Component extends DCLogic {
   T = {
     de: {
       navAbout: 'Über mich', navSkills: 'Skills', navProjects: 'Projekte', navContact: 'Kontakt',
-      hello: 'Hallo Welt', getInTouch: 'Kontakt aufnehmen',
+      hello: 'Hallo Welt', helloHover: 'Ich bin Alexander', getInTouch: 'Kontakt aufnehmen',
       basedIn: 'Zuhause in Ingolstadt', relocate: 'Offen für Umzug', remote: 'Offen für Remote-Arbeit',
       aboutEyebrow: 'Wer ist Alex?', aboutTitle: 'Über mich', letsTalk: 'Lass uns reden',
       aboutText: 'Hallo, ich bin Alexander — Webentwickler aus Ingolstadt. Ich baue Websites und Web-Apps, die nicht nur gut aussehen, sondern sauber funktionieren. Jedes Projekt ist für mich eine Chance, die eleganteste und effizienteste Lösung zu finden. Lassen Sie uns gemeinsam etwas Großartiges bauen!',
@@ -704,7 +714,7 @@ class Component extends DCLogic {
     },
     en: {
       navAbout: 'About me', navSkills: 'Skills', navProjects: 'Projects', navContact: 'Contact',
-      hello: 'Hello world', getInTouch: 'Get in Touch',
+      hello: 'Hello world', helloHover: "I'm Alexander", getInTouch: 'Get in Touch',
       basedIn: 'Based in Ingolstadt', relocate: 'Open to relocate', remote: 'Open to work remote',
       aboutEyebrow: "Who's Alex?", aboutTitle: 'About me', letsTalk: "Let's talk",
       aboutText: "Hey there, I'm Alexander — a web developer from Ingolstadt, Germany. I build websites and web apps that don't just look good but work cleanly. Every project is a chance to find the most elegant, efficient solution. Let's collaborate and build something remarkable together!",
