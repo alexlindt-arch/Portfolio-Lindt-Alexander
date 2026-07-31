@@ -21,6 +21,9 @@
     .al-nav.al-nav-solid{ background:rgba(14,16,19,.85); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
     html, body { margin:0; padding:0; background:#0E1013; }
     * { box-sizing:border-box; }
+    body { font-family:'Bricolage Grotesque',sans-serif; }
+    .al-cta { white-space:nowrap; }
+    .al-nav a { white-space:nowrap; }
     @keyframes al-wave { 0%{transform:rotate(0deg)} 15%{transform:rotate(18deg)} 30%{transform:rotate(-10deg)} 45%{transform:rotate(16deg)} 60%{transform:rotate(-6deg)} 75%{transform:rotate(10deg)} 100%{transform:rotate(0deg)} }
     input::placeholder, textarea::placeholder { color:rgba(248,249,250,.55); font-family:'Bricolage Grotesque',sans-serif; }
     input:-webkit-autofill, textarea:-webkit-autofill { -webkit-text-fill-color:#F8F9FA; caret-color:#F8F9FA; transition:background-color 600000s 0s; }
@@ -523,7 +526,9 @@ class Component extends DCLogic {
   state = {
     lang: (typeof localStorage !== 'undefined' && localStorage.getItem('al-portfolio-lang')) || (this.props.defaultLang ?? 'de'),
     privacy: false,
-    detail: null,
+    detail: (typeof sessionStorage !== 'undefined' && sessionStorage.getItem('al-detail')) || null,
+    showLegal: (typeof sessionStorage !== 'undefined' && sessionStorage.getItem('al-legal') === '1'),
+    legalMode: (typeof sessionStorage !== 'undefined' && sessionStorage.getItem('al-legal-mode')) || 'imprint',
     fName: '', fEmail: '', fMsg: '', touched: {}, sent: false
   };
 
@@ -534,10 +539,35 @@ class Component extends DCLogic {
       const nav = document.querySelector('.al-nav');
       const hero = document.getElementById('hero');
       if (!nav || !hero) return;
-      const past = window.pageYOffset > hero.offsetHeight - 90;
-      nav.classList.toggle('al-nav-solid', past);
+      const y = Math.max(
+        window.pageYOffset || 0,
+        (document.scrollingElement && document.scrollingElement.scrollTop) || 0,
+        document.documentElement.scrollTop || 0,
+        document.body.scrollTop || 0,
+        -(hero.getBoundingClientRect().top || 0)
+      );
+      nav.classList.toggle('al-nav-solid', y > 4);
+      // position:fixed innerhalb eines gezoomten Containers: Breite manuell auf die
+      // echte Viewport-Innenbreite (ohne Scrollbar) setzen, geteilt durch den Zoom aller Vorfahren.
+      let z = 1;
+      for (let el = nav.parentElement; el; el = el.parentElement) {
+        const ez = parseFloat(getComputedStyle(el).zoom);
+        if (ez && ez !== 1) z *= ez;
+      }
+      const cw = Math.min(
+        document.documentElement.clientWidth || Infinity,
+        document.body ? (document.body.clientWidth || Infinity) : Infinity,
+        window.innerWidth || Infinity
+      );
+      nav.style.right = 'auto';
+      nav.style.width = (cw / z) + 'px';
+      const r = nav.getBoundingClientRect();
+      const over = r.right - cw;
+      if (over > 0.5) nav.style.width = ((r.width - over) / z) + 'px';
     };
-    window.addEventListener('scroll', this._navScroll, { passive: true });
+    window.addEventListener('scroll', this._navScroll, { passive: true, capture: true });
+    document.addEventListener('scroll', this._navScroll, { passive: true, capture: true });
+    this._navTick = setInterval(this._navScroll, 200);
     this._navScroll();
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => {
@@ -567,7 +597,13 @@ class Component extends DCLogic {
   }
 
   componentWillUnmount() {
+    if (this._navScroll) {
+      window.removeEventListener('scroll', this._navScroll, true);
+      document.removeEventListener('scroll', this._navScroll, true);
+    }
+    clearInterval(this._navTick);
     if (this._lineObserver) this._lineObserver.disconnect();
+    try { document.documentElement.style.overflow = ''; document.body.style.overflow = ''; } catch (e) {}
   }
 
   TECHICON = {
@@ -610,14 +646,26 @@ class Component extends DCLogic {
     }, 60);
   }
   componentDidUpdate() {
+    this.persistRoute();
     try {
       const lock = !!this.state.detail || !!this.state.showLegal;
       document.documentElement.style.overflow = lock ? 'hidden' : '';
       document.body.style.overflow = lock ? 'hidden' : '';
     } catch (e) {}
   }
-  componentWillUnmount() {
-    try { document.documentElement.style.overflow = ''; document.body.style.overflow = ''; } catch (e) {}
+  persistRoute() {
+    try {
+      const ss = window.sessionStorage;
+      if (this.state.detail) ss.setItem('al-detail', this.state.detail);
+      else ss.removeItem('al-detail');
+      if (this.state.showLegal) {
+        ss.setItem('al-legal', '1');
+        ss.setItem('al-legal-mode', this.state.legalMode || 'imprint');
+      } else {
+        ss.removeItem('al-legal');
+        ss.removeItem('al-legal-mode');
+      }
+    } catch (e) {}
   }
   nextDetail() {
     const i = this.ORDER.indexOf(this.state.detail);
@@ -812,7 +860,42 @@ class Component extends DCLogic {
       errName: this.state.touched.name && !nameOk ? t.errName : '',
       errEmail: this.state.touched.email && !emailOk ? t.errEmail : '',
       errMsg: this.state.touched.msg && !msgOk ? t.errMsg : '',
-      sendForm: () => { if (!formValid) return; this.setState({ sent: true, fName: '', fEmail: '', fMsg: '', touched: {}, privacy: false }); clearTimeout(this._sentT); this._sentT = setTimeout(() => this.setState({ sent: false }), 6000); },
+      sendForm: () => {
+        if (!formValid) return;
+        const name = this.state.fName.trim(), email = this.state.fEmail.trim(), msg = this.state.fMsg.trim();
+        const mail = 'alexanderlindt16@outlook.de';
+        try {
+          // Hidden-iframe form POST: kein CORS/Preflight, funktioniert auch im Preview
+          let sink = document.getElementById('al-mail-sink');
+          if (!sink) {
+            sink = document.createElement('iframe');
+            sink.id = 'al-mail-sink'; sink.name = 'al-mail-sink';
+            sink.style.cssText = 'position:absolute;width:0;height:0;border:0;opacity:0;pointer-events:none;';
+            document.body.appendChild(sink);
+          }
+          const f = document.createElement('form');
+          f.method = 'POST';
+          f.action = 'https://formsubmit.co/' + mail;
+          f.target = 'al-mail-sink';
+          f.style.display = 'none';
+          const add = (k, v) => {
+            const i = document.createElement('input');
+            i.type = 'hidden'; i.name = k; i.value = v;
+            f.appendChild(i);
+          };
+          add('name', name); add('email', email); add('message', msg);
+          add('_subject', 'Portfolio-Kontakt: ' + name);
+          add('_template', 'table');
+          add('_captcha', 'false');
+          add('_replyto', email);
+          document.body.appendChild(f);
+          f.submit();
+          setTimeout(() => { try { f.remove(); } catch (e) {} }, 2000);
+        } catch (e) {}
+        this.setState({ sent: true, fName: '', fEmail: '', fMsg: '', touched: {}, privacy: false });
+        clearTimeout(this._sentT);
+        this._sentT = setTimeout(() => this.setState({ sent: false }), 6000);
+      },
       sentMsg: this.state.sent ? t.sentOk : '',
       openLegalStop: (e) => { if (e && e.stopPropagation) e.stopPropagation(); this.setState({ showLegal: true, legalMode: 'privacy' }); try { window.scrollTo({ top: 0, behavior: 'instant' }); requestAnimationFrame(() => { var c = document.getElementById('legal-scroll'); if (c) c.scrollTop = 0; }); } catch (err) {} },
       detail: this.state.detail ? (this.DETAILS[lang] || this.DETAILS.de)[this.state.detail] : null,
