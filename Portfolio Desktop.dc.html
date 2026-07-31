@@ -508,14 +508,14 @@
         <span onClick="{{ closeDetail }}" style="display:inline-flex; align-items:center; gap:8px; font-weight:700; font-size:18px; color:#0E1013; cursor:pointer;"><img src="assets/images/arrow-back.png" alt="" style="width:24px; height:auto;">{{ goBackLabel }}</span>
       </div>
       <!-- body -->
-      <div style="position:relative; z-index:1; flex:1; display:flex; justify-content:space-between; align-items:center; gap:160px; max-width:1440px; width:100%; margin:0 auto; box-sizing:border-box; padding:32px 120px 0;">
+      <div style="position:relative; z-index:1; flex:1; min-height:0; display:flex; justify-content:space-between; align-items:center; gap:160px; max-width:1440px; width:100%; margin:0 auto; box-sizing:border-box; padding:16px 120px 0;">
         <!-- left -->
-        <div style="width:400px; flex:none; display:flex; flex-direction:column; gap:48px;">
+        <div style="width:400px; flex:none; display:flex; flex-direction:column; gap:28px;">
           <div style="display:inline-flex; flex-direction:column; gap:4px; align-self:flex-start;">
             <span style="font-weight:700; font-size:64px; line-height:100%; color:#0E1013;">{{ detail.title }}</span>
             <img src="assets/images/blue-underline.png" alt="" style="width:121px; height:20px; object-fit:contain;">
           </div>
-          <div style="display:flex; flex-direction:column; gap:32px;">
+          <div style="display:flex; flex-direction:column; gap:24px;">
             <div style="display:flex; flex-direction:column; gap:16px;">
               <div style="font-weight:700; font-size:24px; line-height:100%; color:#0E1013;">{{ t.detailDesc }}</div>
               <p style="margin:0; font-size:18px; line-height:22px; text-align:justify; color:#0E1013;">{{ detail.desc }}</p>
@@ -533,7 +533,7 @@
           </div>
         </div>
         <!-- right: dark panel provided by overlay bg -->
-        <div style="position:relative; z-index:1; width:560px; flex:none; display:flex; flex-direction:column; align-items:flex-end; justify-content:flex-end; gap:48px;">
+        <div style="position:relative; z-index:1; width:560px; flex:none; display:flex; flex-direction:column; align-items:flex-end; justify-content:flex-end; gap:28px;">
           <div style="position:relative; width:560px;">
             <img src="{{ detail.img }}" alt="{{ detail.title }}" style="width:560px; height:398px; object-fit:cover; border-radius:20px; box-shadow:0 24px 60px rgba(0,0,0,.4); display:block;">
             <sc-if value="{{ notPollo }}" hint-placeholder-val="{{ true }}">
@@ -556,7 +556,7 @@
         </div>
       </div>
       <!-- next project row -->
-      <div style="position:relative; z-index:1; max-width:1440px; width:100%; margin:0 auto; box-sizing:border-box; padding:48px 120px 56px; display:flex; justify-content:flex-end;">
+      <div style="position:relative; z-index:1; flex:none; max-width:1440px; width:100%; margin:0 auto; box-sizing:border-box; padding:12px 120px 28px; display:flex; justify-content:flex-end;">
         <span onClick="{{ nextDetail }}" style="display:inline-flex; align-items:center; gap:8px; font-weight:700; font-size:18px; line-height:120%; color:#F8F9FA; cursor:pointer;">{{ nextLabel }}<img src="assets/images/arrow-yellow.png" alt="" style="width:24px; height:24px; object-fit:contain; transform:scaleX(-1);"></span>
       </div>
     </div>
