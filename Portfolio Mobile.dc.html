@@ -45,7 +45,7 @@
     .al-hello:hover .al-hello-hover, .al-hello.is-wave .al-hello-hover { position:static; transform:none; opacity:1; }
     .al-hello-wave { position:absolute; right:-4px; top:-34px; width:40px; height:40px; line-height:0; opacity:0; transform:rotate(-180deg) scale(.6); transform-origin:75% 75%; pointer-events:none; z-index:2; }
     .al-hello-wave svg { width:40px; height:40px; display:block; }
-    @keyframes al-hand { 0%{opacity:0; transform:rotate(-180deg) scale(.6)} 14%{opacity:1; transform:rotate(0deg) scale(1)} 26%{transform:rotate(18deg)} 38%{transform:rotate(-10deg)} 50%{transform:rotate(16deg)} 62%{transform:rotate(-6deg)} 74%{transform:rotate(10deg)} 100%{opacity:1; transform:rotate(0deg) scale(1)} }
+    @keyframes al-hand { 0%{opacity:0; transform:rotate(-180deg) scale(.6)} 15%{opacity:1; transform:rotate(0deg) scale(1)} 30%{transform:rotate(25deg)} 45%{transform:rotate(-25deg)} 60%{transform:rotate(25deg)} 75%{transform:rotate(-25deg)} 90%{transform:rotate(14deg)} 100%{opacity:1; transform:rotate(0deg) scale(1)} }
     .al-hello:hover .al-hello-wave, .al-hello.is-wave .al-hello-wave { animation:al-hand 2.4s ease forwards; }
     .al-word .al-ltr { display:inline-block; color:#F8F9FA; cursor:pointer; transition:color .2s ease; }
     .al-word .al-ltr:hover, .al-word .al-ltr.is-lit { color:#F7C518; }
@@ -738,7 +738,7 @@ class Component extends DCLogic {
   T = {
     de: {
       navAbout: 'Über mich', navSkills: 'Skills', navProjects: 'Projekte', navContact: 'Kontakt',
-      hello: 'Hallo Welt', helloHover: 'Ich bin Alexander', getInTouch: 'Kontakt aufnehmen',
+      hello: 'Hallo Welt', helloHover: 'Ich bin Alexander Lindt', getInTouch: 'Kontakt aufnehmen',
       aboutEyebrow: 'Wer ist Alex?', aboutTitle: 'Über mich', letsTalk: 'Lass uns reden',
       aboutText: 'Hallo, ich bin Alexander — Webentwickler aus Ingolstadt. Ich baue Websites und Web-Apps, die nicht nur gut aussehen, sondern sauber funktionieren. Jedes Projekt ist für mich eine Chance, die eleganteste und effizienteste Lösung zu finden. Lassen Sie uns gemeinsam etwas Großartiges bauen!',
       basedIn: 'Zuhause in Ingolstadt', relocate: 'Offen für Umzug', remote: 'Offen für Remote-Arbeit',
@@ -762,7 +762,7 @@ class Component extends DCLogic {
     },
     en: {
       navAbout: 'About me', navSkills: 'Skills', navProjects: 'Projects', navContact: 'Contact',
-      hello: 'Hello world', helloHover: "I'm Alexander", getInTouch: 'Get in Touch',
+      hello: 'Hello world', helloHover: "I'm Alexander Lindt", getInTouch: 'Get in Touch',
       testiEyebrow: 'In their words:', testiTitle: "Colleagues' Thoughts", profile: 'Profile',
       stackEyebrow: 'My stack', stackTitle: 'Skill set',
       stackText: 'From semantic HTML to complex Angular apps: I work with modern front-end technologies and stay curious — I pick up new tools and frameworks quickly and gladly.',
