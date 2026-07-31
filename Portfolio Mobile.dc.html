@@ -586,6 +586,25 @@ class Component extends DCLogic {
     document.addEventListener('scroll', this._navScroll, { passive: true, capture: true });
     this._navTick = setInterval(this._navScroll, 200);
     this._navScroll();
+    // Smooth-Scroll fuer alle Anker-Links (im zoom-Container/iframe springt der Browser sonst
+    // hart). Doppeltes rAF laesst erst navClose/closeLegal/closeDetail (+ScrollLock-Restore)
+    // laufen, dann gleiten wir sauber zum Ziel.
+    this._smoothAnchor = (e) => {
+      const a = e.target && e.target.closest ? e.target.closest('a[href^="#"]') : null;
+      if (!a) return;
+      const href = a.getAttribute('href') || '';
+      if (href.length < 2 || !document.getElementById(href.slice(1))) return;
+      e.preventDefault();
+      const go = () => {
+        const t = document.getElementById(href.slice(1));
+        if (!t) return;
+        const top = t.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop || 0) - 64;
+        try { window.scrollTo({ top: top < 0 ? 0 : top, behavior: 'smooth' }); }
+        catch (err) { window.scrollTo(0, top < 0 ? 0 : top); }
+      };
+      requestAnimationFrame(() => requestAnimationFrame(go));
+    };
+    document.addEventListener('click', this._smoothAnchor, true);
     this._onScroll = () => {
       const cards = document.querySelectorAll('[data-testi-idx]');
       if (!cards.length) return;
@@ -626,6 +645,7 @@ class Component extends DCLogic {
       document.removeEventListener('scroll', this._navScroll, true);
     }
     clearInterval(this._navTick);
+    if (this._smoothAnchor) document.removeEventListener('click', this._smoothAnchor, true);
     if (this._onScroll) { window.removeEventListener('scroll', this._onScroll); window.removeEventListener('resize', this._onScroll); }
     if (this._lineObserver) this._lineObserver.disconnect();
   }
