@@ -16,8 +16,13 @@
   <meta charset="utf-8">
   <title>Alexander Lindt — Portfolio</title>
   <style>
-    html, body { margin:0; padding:0; background:#0E1013; }
+    html, body { margin:0; padding:0; background:#0E1013; overflow-x:hidden; max-width:100%; }
     * { box-sizing:border-box; }
+    /* Handy: kein sichtbarer Scrollbalken (Scrollen bleibt) — ab 900px normal */
+    @media (max-width:899px) {
+      html, body { scrollbar-width:none; -ms-overflow-style:none; }
+      html::-webkit-scrollbar, body::-webkit-scrollbar { width:0; height:0; display:none; }
+    }
   </style>
 </helmet>
 
@@ -34,10 +39,15 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { w: (typeof window !== 'undefined' ? window.innerWidth : 1280) };
+  static vw() {
+    if (typeof window === 'undefined') return 1280;
+    // clientWidth excludes the vertical scrollbar -> zooming by it never overflows horizontally
+    return document.documentElement.clientWidth || window.innerWidth;
+  }
+  state = { w: Component.vw() };
   componentDidMount() {
     this._onResize = () => {
-      const w = window.innerWidth;
+      const w = Component.vw();
       if (w !== this.state.w) this.setState({ w });
     };
     window.addEventListener('resize', this._onResize);
