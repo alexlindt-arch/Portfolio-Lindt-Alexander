@@ -11,3 +11,7 @@ desktop.ini
 # Editor
 .vscode/
 .idea/
+
+# Deploy-Zugangsdaten und Server-Backups (niemals ins oeffentliche Repo)
+deploy/ftp.json
+deploy/backup/

@@ -1,0 +1,25 @@
+# BEGIN Portfolio-Static
+# Statisches Portfolio liegt direkt im Domain-Root. WordPress bleibt darunter
+# erreichbar (/wp-admin/), rendert die Startseite aber nicht mehr.
+DirectoryIndex index.html index.php
+
+<IfModule mod_headers.c>
+  # HTML + DC-Komponenten: nie blind aus dem Cache, immer gegen ETag pruefen.
+  # Genau das hat beim iframe gefehlt (7 Tage max-age ohne Validator).
+  <FilesMatch "\.(html|xml|txt)$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+  # Versionierte Skripte (?v=...) duerfen lange liegen bleiben.
+  <FilesMatch "\.(js|css|woff2?)$">
+    Header set Cache-Control "public, max-age=31536000"
+  </FilesMatch>
+  # Bilder: 30 Tage.
+  <FilesMatch "\.(png|jpe?g|webp|gif|svg|ico|avif)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json image/svg+xml
+</IfModule>
+# END Portfolio-Static
