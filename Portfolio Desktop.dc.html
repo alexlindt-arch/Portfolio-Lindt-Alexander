@@ -282,11 +282,11 @@
       </div>
       <div onClick="{{ openAsCars }}" style="flex:1 1 0; min-width:0; display:flex; flex-direction:column; gap:32px; cursor:pointer;">
         <div class="al-projimg" style="width:100%; aspect-ratio:560/398; overflow:hidden; border-radius:20px;">
-          <img src="assets/images/proj-burger.jpg" alt="BurgerHouse" style="width:100%; height:100%; object-fit:cover; display:block; box-shadow:0 8px 32px rgba(14,16,19,.14); border-radius:20px;">
+          <img src="assets/images/proj-dabubble.jpg" alt="DABubble" style="width:100%; height:100%; object-fit:cover; display:block; box-shadow:0 8px 32px rgba(14,16,19,.14); border-radius:20px;">
           <span class="al-pd">{{ t.projectDetails }}</span>
         </div>
         <div style="display:flex; flex-direction:column; gap:16px;">
-          <div style="font-weight:700; font-size:24px;">BurgerHouse</div>
+          <div style="font-weight:700; font-size:24px;">DABubble</div>
           <p style="margin:0; font-size:18px; line-height:22px;">{{ t.projAsCars }}</p>
         </div>
       </div>
@@ -690,12 +690,12 @@ class Component extends DCLogic {
     de: {
       join: { title: 'Join', img: 'assets/images/proj-join-det.jpg', fit: 'contain', desc: 'Task-Manager nach dem Kanban-System. Aufgaben per Drag & Drop erstellen und organisieren, Nutzer und Kategorien zuweisen.', impl: 'Ich habe das Drag-&-Drop-Board umgesetzt und die Datenhaltung über Firebase angebunden. Fokus auf sauberer Komponentenstruktur, wiederverwendbaren Services und responsivem Verhalten.', duration: 'Dauer: 5 Wochen', tech: ['CSS', 'HTML', 'Firebase', 'Angular', 'TypeScript'], github: 'https://github.com/RudolfSchultz/Join-groupe', live: 'https://join-3175.developerakademie.net/index.html' },
       pollo: { title: 'El Pollo Loco', img: 'assets/images/proj-pollo.jpg', fit: 'cover', desc: 'Jump-’n’-Run-Spiel auf Basis objektorientierter Programmierung. Hilf Pepe, Münzen und Tabasco-Salsa zu finden, um gegen das verrückte Huhn zu bestehen.', impl: 'Spiellogik, Kollisionserkennung und Animationen wurden vollständig objektorientiert in Vanilla JavaScript umgesetzt — inklusive Statusleisten, Sound und Endgegner.', duration: 'Dauer: 3 Wochen', tech: ['CSS', 'HTML', 'JavaScript', 'OOP'], github: 'https://github.com/alexlindt-arch/El-Pollo-Loco', live: 'https://alexander-lindt.developerakademie.net/El-Pollo-Loco/' },
-      ascars: { title: 'BurgerHouse', img: 'assets/images/proj-burger.jpg', fit: 'cover', desc: 'Bestell-App für ein Lieferrestaurant: Speisekarte mit Burgern, Pizza & Salaten, Warenkorb mit Live-Summe und Bestellbestätigung — komplett responsiv.', impl: 'Umsetzung in Vanilla JavaScript mit dynamischem Rendering aus einer Datenstruktur, Warenkorb-Logik (Menge, Zwischensumme, Liefergebühr, Mindestbestellwert) und mobilem Warenkorb-Dialog.', duration: 'Dauer: 4 Wochen', tech: ['CSS', 'HTML', 'JavaScript'], github: 'https://github.com/alexlindt-arch/BestellApp', live: 'https://alexander-lindt.developerakademie.net/BestellApp/' }
+      ascars: { title: 'DABubble', img: 'assets/images/proj-dabubble.jpg', fit: 'cover', desc: 'Messenger nach dem Vorbild von Slack: Channels anlegen, Direktnachrichten schreiben, in Threads antworten und mit Emojis reagieren — alles in Echtzeit und komplett responsiv.', impl: 'Gruppenprojekt zu dritt. Ich habe das Projekt-Grundgerüst auf GitHub aufgesetzt und den Thread-Bereich gebaut: Antworten, Reaktionen, @-Erwähnungen und das Bearbeiten eigener Nachrichten, angebunden an Firebase Auth und Firestore.', duration: 'Dauer: 3 Wochen', tech: ['CSS', 'HTML', 'Firebase', 'Angular', 'TypeScript'], github: 'https://github.com/alexlindt-arch/DABubble', live: 'https://dabubble-3258.developerakademie.net/angular-projects/dabubble/login' }
     },
     en: {
       join: { title: 'Join', img: 'assets/images/proj-join-det.jpg', fit: 'contain', desc: 'Task manager inspired by the Kanban System. Create and organize tasks using drag and drop, assign users and categories.', impl: 'I built the drag-and-drop board and wired up data persistence with Firebase. Focus on clean component structure, reusable services and responsive behaviour.', duration: 'Duration: 5 weeks', tech: ['CSS', 'HTML', 'Firebase', 'Angular', 'TypeScript'], github: 'https://github.com/RudolfSchultz/Join-groupe', live: 'https://join-3175.developerakademie.net/index.html' },
       pollo: { title: 'El Pollo Loco', img: 'assets/images/proj-pollo.jpg', fit: 'cover', desc: 'Jump-and-run game built on an object-oriented approach. Help Pepe find coins and tabasco salsa to fight the crazy hen.', impl: 'Game logic, collision detection and animations were implemented fully object-oriented in vanilla JavaScript — including status bars, sound and a boss fight.', duration: 'Duration: 3 weeks', tech: ['CSS', 'HTML', 'JavaScript', 'OOP'], github: 'https://github.com/alexlindt-arch/El-Pollo-Loco', live: 'https://alexander-lindt.developerakademie.net/El-Pollo-Loco/' },
-      ascars: { title: 'BurgerHouse', img: 'assets/images/proj-burger.jpg', fit: 'cover', desc: 'Ordering app for a delivery restaurant: a menu of burgers, pizza & salads, a live-total cart and order confirmation — fully responsive.', impl: 'Built in vanilla JavaScript with dynamic rendering from a data structure, cart logic (quantity, subtotal, delivery fee, minimum order) and a mobile cart dialog.', duration: 'Duration: 4 weeks', tech: ['CSS', 'HTML', 'JavaScript'], github: 'https://github.com/alexlindt-arch/BestellApp', live: 'https://alexander-lindt.developerakademie.net/BestellApp/' }
+      ascars: { title: 'DABubble', img: 'assets/images/proj-dabubble.jpg', fit: 'cover', desc: 'Messenger modelled on Slack: create channels, send direct messages, reply in threads and react with emojis — all in real time and fully responsive.', impl: 'Group project in a team of three. I set up the project scaffold on GitHub and built the thread panel: replies, reactions, @-mentions and editing your own messages, wired to Firebase Auth and Firestore.', duration: 'Duration: 3 weeks', tech: ['CSS', 'HTML', 'Firebase', 'Angular', 'TypeScript'], github: 'https://github.com/alexlindt-arch/DABubble', live: 'https://dabubble-3258.developerakademie.net/angular-projects/dabubble/login' }
     }
   };
 
@@ -757,7 +757,7 @@ class Component extends DCLogic {
       projectsText: 'Schauen Sie sich um und probieren Sie meine Projekte aus. Mein Fokus: responsive, benutzerfreundliche Anwendungen mit effizientem, sauberem Code.',
       projectDetails: 'Projekt-Details', projJoin: 'Task-Manager nach dem Kanban-System. Aufgaben per Drag & Drop erstellen und organisieren, Nutzer und Kategorien zuweisen.',
       projPollo: 'Jump-’n’-Run-Spiel auf Basis objektorientierter Programmierung. Hilf Pepe, Münzen und Tabasco-Salsa zu finden, um gegen das verrückte Huhn zu bestehen.',
-      projAsCars: 'Bestell-App für ein Lieferrestaurant: Speisekarte mit Burgern, Pizza & Salaten, Warenkorb mit Live-Summe und Bestellbestätigung.',
+      projAsCars: 'Slack-Klon für Teams: Channels, Direktnachrichten, Threads und Reaktionen in Echtzeit — mit Gäste-Login zum Ausprobieren.',
       testiEyebrow: 'Stimmen dazu:', testiTitle: 'Das sagen Kollegen',
       profile: 'Profil',
       contactEyebrow: 'Kontakt', contactTitle: 'Bereit, zusammen- zuarbeiten?',
@@ -785,7 +785,7 @@ class Component extends DCLogic {
       projectsText: 'Take a look and interact with my projects. My focus: responsive, user-friendly applications built with efficient, clean code.',
       projectDetails: 'Project details', projJoin: 'Task manager inspired by the Kanban system. Create and organize tasks using drag and drop, assign users and categories.',
       projPollo: 'Jump, run and throw game based on an object-oriented approach. Help Pepe find coins and tabasco salsa to fight the crazy hen.',
-      projAsCars: 'Ordering app for a delivery restaurant: a menu of burgers, pizza & salads, a live-total cart and order confirmation.',
+      projAsCars: 'Slack clone for teams: channels, direct messages, threads and reactions in real time — with a guest login to try it out.',
       testiEyebrow: 'In their words:', testiTitle: "Colleagues' Thoughts",
       profile: 'Profile',
       contactEyebrow: 'Contact me', contactTitle: 'Ready to work together?',
