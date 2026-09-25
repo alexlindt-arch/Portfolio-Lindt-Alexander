@@ -13,7 +13,16 @@ A single-page, statically-served portfolio with a hand-crafted paper/collage vis
 - **Responsive layout** for desktop and mobile
 - **Custom typography** via Google Fonts (Bricolage Grotesque, Dancing Script, Sacramento, Kalam)
 - **Legal pages** (Imprint / Privacy) rendered from the same page
+- **German / English** language toggle
 - JavaScript-driven content rendering and interactive image slots
+
+## 💼 Featured Projects
+
+| Project | Description | Tech | Links |
+|---|---|---|---|
+| **Join** | Kanban task manager: create and organize tasks with drag and drop, assign users and categories. | Angular, TypeScript, Firebase | [Live](https://join-3175.developerakademie.net/index.html) · [GitHub](https://github.com/RudolfSchultz/Join-groupe) |
+| **El Pollo Loco** | Object-oriented jump-and-run game: help Pepe collect coins and salsa to beat the crazy hen. | JavaScript (OOP), HTML, CSS | [Live](https://alexander-lindt.developerakademie.net/El-Pollo-Loco/) · [GitHub](https://github.com/alexlindt-arch/El-Pollo-Loco) |
+| **DABubble** | Slack clone for teams: channels, direct messages, threads and reactions in real time, with a guest login. | Angular, TypeScript, Firebase | [Live](https://dabubble-3258.developerakademie.net/angular-projects/dabubble/login) · [GitHub](https://github.com/alexlindt-arch/DABubble) |
 
 ## 🛠️ Tech Stack
 
@@ -29,14 +38,14 @@ No build step required — it is a static site.
 ## 🚀 Getting Started
 
 The site is live at **[alexanderlindtwebdesign.com](https://alexanderlindtwebdesign.com)** — no setup needed to view it.
-It is also served straight from this repository via GitHub Pages:
-**[alexlindt-arch.github.io/portfolio](https://alexlindt-arch.github.io/portfolio/)**
+A mirror is served straight from this repository via GitHub Pages:
+**[alexlindt-arch.github.io/Portfolio-Lindt-Alexander](https://alexlindt-arch.github.io/Portfolio-Lindt-Alexander/)**
 
 To run it locally instead, clone the repository:
 
 ```bash
-git clone https://github.com/alexlindt-arch/portfolio.git
-cd portfolio
+git clone https://github.com/alexlindt-arch/Portfolio-Lindt-Alexander.git
+cd Portfolio-Lindt-Alexander
 ```
 
 Then either open `index.html` directly in a browser, or serve it with any static server:
@@ -54,7 +63,7 @@ Visit `http://localhost:8000`.
 ## 📁 Project Structure
 
 ```
-portfolio/
+Portfolio-Lindt-Alexander/
 ├── index.html                 # Main portfolio page (entry)
 ├── Portfolio Desktop.dc.html  # Desktop layout (loaded by the page runtime)
 ├── Portfolio Mobile.dc.html   # Mobile layout (loaded by the page runtime)
@@ -64,6 +73,7 @@ portfolio/
 ├── assets/
 │   ├── images/                # Portraits, project shots, textures, stickers
 │   └── icons/                 # Favicons
+├── deploy/                    # Hostinger deploy script + .htaccess block
 └── README.md
 ```
 
